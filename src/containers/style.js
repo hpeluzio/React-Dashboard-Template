@@ -57,15 +57,11 @@ export const LeftHeader = styled.div`
         // @media screen and (min-width: 1024) { //Desktop
         // @media screen and (min-width: 768px) and (max-width: 1023px) { //Tablet
         @media screen and (min-width: 767px) {
-            display: none;
-            /* opacity: 0; */
+            /* display: none; */
+            opacity: 0.5;
             transition-property: all;
             transition-duration: 0.5s;
         }
-    }
-
-    .spacer {
-        flex-grow: 1;
     }
 
     h3 {
