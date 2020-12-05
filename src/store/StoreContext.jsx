@@ -5,7 +5,6 @@ const StoreContext = createContext()
 export default function StoreProvider({ children }) {
     const [store, setStore] = useState({
         toggleHamburguer: false,
-        responsive: 'desktop',
     })
     return (
         <StoreContext.Provider value={{ store, setStore }}>

@@ -1,11 +1,14 @@
 import React from 'react'
 
-import Main from './containers/Main'
 import StoreProvider from './store/StoreContext'
+import ViewportProvider from './store/ViewportContext'
+import Main from './containers/Main'
 const App = () => {
     return (
         <StoreProvider>
-            <Main></Main>
+            <ViewportProvider>
+                <Main></Main>
+            </ViewportProvider>
         </StoreProvider>
     )
 }
