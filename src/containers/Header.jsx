@@ -10,48 +10,61 @@ const Header = () => {
     const mobile = () => (layout === 'mobile' ? true : false)
 
     return (
-        <HeaderBar>
-            <LeftHeader>
-                {!toggle && (
-                    <i
-                        value={toggle}
-                        onClick={() => {
-                            setToggle(!toggle)
-                        }}
-                        className="fas fa-bars"
-                    ></i>
-                )}
+        <>
+            {mobile() === true && toggle === true && (
+                <Backwrap
+                    onClick={() => {
+                        setToggle(!toggle)
+                    }}
+                ></Backwrap>
+            )}
+            <HeaderBar>
+                <LeftHeader>
+                    {(mobile() === false || toggle === false) && (
+                        <i
+                            value={toggle}
+                            onClick={() => {
+                                setToggle(!toggle)
+                            }}
+                            className="fas fa-bars"
+                        ></i>
+                    )}
 
-                {toggle && (
-                    <i
-                        value={toggle}
-                        onClick={() => {
-                            setToggle(!toggle)
-                        }}
-                        className="fas fa-times"
-                    ></i>
-                )}
+                    {mobile() === true && toggle === true && (
+                        <i
+                            value={toggle}
+                            onClick={() => {
+                                setToggle(!toggle)
+                            }}
+                            className="fas fa-times"
+                        ></i>
+                    )}
 
-                <Spacer />
+                    <Spacer />
 
-                <Link to="/" className="logo_home">
-                    <h3>
-                        App <span>Logo</span>
-                    </h3>
-                </Link>
-            </LeftHeader>
+                    <Link to="/" className="logo_home">
+                        <h3>
+                            App <span>Logo</span>
+                        </h3>
+                    </Link>
+                </LeftHeader>
 
-            <RightHeader>
-                <Spacer />
+                <RightHeader>
+                    <Spacer />
 
-                <LinkHeader to="/register">
-                    {!mobile() && <div>Register</div>}
-                </LinkHeader>
-                <LinkHeader to="/login">
-                    {!mobile() && <div>Login</div>}
-                </LinkHeader>
-            </RightHeader>
-        </HeaderBar>
+                    {!mobile() && (
+                        <LinkHeader to="/register">
+                            <div>Register</div>
+                        </LinkHeader>
+                    )}
+                    {!mobile() && (
+                        <LinkHeader to="/login">
+                            <div>Login</div>
+                        </LinkHeader>
+                    )}
+                </RightHeader>
+            </HeaderBar>
+        </>
     )
 }
 
@@ -141,6 +154,16 @@ const LinkHeader = styled(Link)`
 
 const Spacer = styled.div`
     flex-grow: 1;
+`
+
+const Backwrap = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
 `
 
 export default Header

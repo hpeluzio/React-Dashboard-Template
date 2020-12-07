@@ -33,7 +33,7 @@ const Content = () => {
         )
     else
         return (
-            <ContentContainerMobile>
+            <ContentContainer style={{ left: 0 }}>
                 <div className="content-container">
                     <Switch>
                         <Route path="/" exact component={Home} />
@@ -41,31 +41,25 @@ const Content = () => {
                         <Route path="/register" exact component={Register} />
                     </Switch>
                 </div>
-            </ContentContainerMobile>
+            </ContentContainer>
         )
 }
 
 const ContentContainer = styled.div`
     position: fixed;
     z-index: 0;
-    top: var(--header-height);
     width: 100%;
-    left: var(--sidebar-width);
+    height: 93%;
     right: 0;
-    height: 100vh;
+    top: var(--header-height);
+    left: var(--sidebar-width);
     transition: 0.5s;
+    transition-property: all;
     background-image: url(${contentBackground});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     overflow-y: auto;
-
-    /* display: none; */
-
-    /* @media (min-width: 768px) {
-        margin-left: calc(var(--sidebar-width) * 1);
-        transition: 0.2s;
-    } */
 
     .content-container {
         background-color: #fff;
@@ -75,10 +69,6 @@ const ContentContainer = styled.div`
         padding: 1rem;
         border: 2px solid rgba(0, 0, 0, 0.1);
     }
-`
-const ContentContainerMobile = styled(ContentContainer)`
-    margin-left: calc(var(--sidebar-width) * -1);
-    /* background: blue; */
 `
 
 export default Content

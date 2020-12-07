@@ -12,6 +12,12 @@ import profile from '../images/profile.png'
 const Sidebar = () => {
     const { layout, toggle, setToggle } = useViewport()
 
+    // const styleHidden = {
+    //     opacity: 0,
+    //     width: 0,
+    //     pointer-events: 'none'
+    // }
+
     console.log('toggle', toggle)
     console.log('Layout: ', layout)
 
@@ -19,49 +25,57 @@ const Sidebar = () => {
 
     if (mobile() === true && toggle === true)
         return (
-            <>
-                <Backwrap
-                    onClick={() => {
-                        setToggle(!toggle)
-                    }}
-                ></Backwrap>
-                <SidebarContainerMobile>
-                    <div>
-                        <img src={profile} className="profile_image" alt="" />
-                        <h4>Jessica</h4>
-                    </div>
+            // <>
+            //     <Backwrap
+            //         onClick={() => {
+            //             setToggle(!toggle)
+            //         }}
+            //     ></Backwrap>
+            <SidebarContainer>
+                <div>
+                    <img src={profile} className="profile_image" alt="" />
+                    <h4>Jessica</h4>
+                </div>
 
-                    <a href="#">
-                        <i className="fas fa-desktop"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="#">
-                        <i className="fas fa-cogs"></i>
-                        <span>Components</span>
-                    </a>
-                    <a href="#">
-                        <i className="fas fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                    <a href="#">
-                        <i className="fas fa-th"></i>
-                        <span>Forms</span>
-                    </a>
-                    <a href="#">
-                        <i className="fas fa-info-circle"></i>
-                        <span>About</span>
-                    </a>
-                    <a href="#">
-                        <i className="fas fa-sliders-h"></i>
-                        <span>Settings</span>
-                    </a>
-                </SidebarContainerMobile>
-            </>
+                <a href="#">
+                    <i className="fas fa-desktop"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#">
+                    <i className="fas fa-cogs"></i>
+                    <span>Components</span>
+                </a>
+                <a href="#">
+                    <i className="fas fa-table"></i>
+                    <span>Tables</span>
+                </a>
+                <a href="#">
+                    <i className="fas fa-th"></i>
+                    <span>Forms</span>
+                </a>
+                <a href="#">
+                    <i className="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+                <a href="#">
+                    <i className="fas fa-sliders-h"></i>
+                    <span>Settings</span>
+                </a>
+            </SidebarContainer>
+            // </>
         )
     else if (mobile() === true && toggle === false) {
-        return <></>
+        return (
+            <SidebarContainer
+                style={{ width: 0, pointerEvents: 'none' }}
+            ></SidebarContainer>
+        )
     } else if (mobile() === false && toggle === false) {
-        return <></>
+        return (
+            <SidebarContainer
+                style={{ width: 0, pointerEvents: 'none' }}
+            ></SidebarContainer>
+        )
     } else
         return (
             <SidebarContainer>
@@ -99,7 +113,7 @@ const Sidebar = () => {
 }
 
 const SidebarContainer = styled.div`
-    z-index: 2;
+    z-index: 3;
     position: fixed;
     left: 0;
     top: var(--header-height);
@@ -108,15 +122,9 @@ const SidebarContainer = styled.div`
     background: #2f323a;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     transition: 0.5s;
     transition-property: all;
     overflow-y: auto;
-
-    /* @media (max-width: 768px) {
-        transition-duration: 0.5s;
-        margin-left: calc(var(--sidebar-width) * -1);
-    } */
 
     div {
         height: 22rem;
@@ -161,21 +169,6 @@ const SidebarContainer = styled.div`
     i {
         padding-right: 10px;
     }
-`
-
-const SidebarContainerMobile = styled(SidebarContainer)`
-    /* z-index: 100; */
-    /* display: none; */
-`
-
-const Backwrap = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.5);
 `
 
 export default Sidebar
