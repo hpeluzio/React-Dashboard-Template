@@ -8,16 +8,6 @@ function Home() {
 
     return (
         <>
-            <div>
-                {lorens.map((lorem) => {
-                    return (
-                        <h3>
-                            Lorem1: {lorem} <hr />
-                        </h3>
-                    )
-                })}
-            </div>
-            <hr />
             <Button
                 onClick={() => {
                     var lor = [...lorens]
@@ -28,6 +18,19 @@ function Home() {
             >
                 ADD LOREM
             </Button>
+            {lorens.map((lorem, idx) => {
+                return (
+                    <LoremDiv>
+                        <h3>
+                            <h5>
+                                <h3>Lorem {idx}:</h3> {lorem}{' '}
+                            </h5>
+                            <hr />
+                        </h3>
+                    </LoremDiv>
+                )
+            })}
+            <hr />
         </>
     )
 }
@@ -50,6 +53,9 @@ const Button = styled.button`
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+`
+const LoremDiv = styled.div`
+    padding: 1rem;
 `
 
 export default Home
