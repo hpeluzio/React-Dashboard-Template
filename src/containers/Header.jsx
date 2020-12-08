@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { useViewport } from '../store/ViewportContext'
 
+import Hamburguer from './Hamburguer'
+
 const Header = () => {
     const { layout, toggle, setToggle } = useViewport()
 
@@ -20,25 +22,11 @@ const Header = () => {
             )}
             <HeaderBar>
                 <LeftHeader>
-                    {(mobile() === false || toggle === false) && (
-                        <i
-                            value={toggle}
-                            onClick={() => {
-                                setToggle(!toggle)
-                            }}
-                            className="fas fa-bars"
-                        ></i>
-                    )}
-
-                    {mobile() === true && toggle === true && (
-                        <i
-                            value={toggle}
-                            onClick={() => {
-                                setToggle(!toggle)
-                            }}
-                            className="fas fa-times"
-                        ></i>
-                    )}
+                    <Hamburguer
+                        layout={layout}
+                        toggle={toggle}
+                        setToggle={setToggle}
+                    />
 
                     <Spacer />
 
@@ -99,14 +87,6 @@ const LeftHeader = styled.div`
         :hover {
             color: #19b3d3;
         }
-
-        // @media screen and (min-width: 1024) { //Desktop
-        // @media screen and (min-width: 768px) and (max-width: 1023px) { //Tablet
-        /* @media screen and (min-width: 767px) {
-            opacity: 0.5;
-            transition-property: all;
-            transition-duration: 0.5s;
-        } */
     }
 
     h3 {
@@ -126,17 +106,13 @@ const LeftHeader = styled.div`
 const RightHeader = styled.div`
     width: 100%;
     height: 100%;
-
     margin: 0;
     display: flex;
     align-items: center;
-
-    /* justify-self: flex-end; */
 `
 
 const LinkHeader = styled(Link)`
     padding: 2.5rem;
-    /* background: tomato; */
     font-size: 1.6rem;
     color: #fff;
     transition-duration: 0.5s;

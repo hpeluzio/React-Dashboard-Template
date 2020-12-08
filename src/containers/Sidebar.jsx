@@ -12,104 +12,48 @@ import profile from '../images/profile.png'
 const Sidebar = () => {
     const { layout, toggle, setToggle } = useViewport()
 
-    // const styleHidden = {
-    //     opacity: 0,
-    //     width: 0,
-    //     pointer-events: 'none'
-    // }
-
-    console.log('toggle', toggle)
-    console.log('Layout: ', layout)
-
     const mobile = () => (layout === 'mobile' ? true : false)
 
-    if (mobile() === true && toggle === true)
-        return (
-            // <>
-            //     <Backwrap
-            //         onClick={() => {
-            //             setToggle(!toggle)
-            //         }}
-            //     ></Backwrap>
-            <SidebarContainer>
-                <div>
-                    <img src={profile} className="profile_image" alt="" />
-                    <h4>Jessica</h4>
-                </div>
+    const hideSidebar = () => {
+        if (layout === 'mobile' && toggle === true) return false
+        if (layout === 'mobile' && toggle === false) return true
+        if (layout === 'desktop' && toggle === true) return false
+        if (layout === 'desktop' && toggle === false) return true
+    }
 
-                <a href="#">
-                    <i className="fas fa-desktop"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-cogs"></i>
-                    <span>Components</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-table"></i>
-                    <span>Tables</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-th"></i>
-                    <span>Forms</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-info-circle"></i>
-                    <span>About</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-sliders-h"></i>
-                    <span>Settings</span>
-                </a>
-            </SidebarContainer>
-            // </>
-        )
-    else if (mobile() === true && toggle === false) {
-        return (
-            <SidebarContainer
-                style={{ width: 0, pointerEvents: 'none' }}
-            ></SidebarContainer>
-        )
-    } else if (mobile() === false && toggle === false) {
-        return (
-            <SidebarContainer
-                style={{ width: 0, pointerEvents: 'none' }}
-            ></SidebarContainer>
-        )
-    } else
-        return (
-            <SidebarContainer>
-                <div>
-                    <img src={profile} className="profile_image" alt="" />
-                    <h4>Jessica</h4>
-                </div>
+    return (
+        <SidebarContainer hideSidebar={hideSidebar()}>
+            <div>
+                <img src={profile} className="profile_image" alt="" />
+                <h4>Jessica</h4>
+            </div>
 
-                <a href="#">
-                    <i className="fas fa-desktop"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-cogs"></i>
-                    <span>Components</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-table"></i>
-                    <span>Tables</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-th"></i>
-                    <span>Forms</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-info-circle"></i>
-                    <span>About</span>
-                </a>
-                <a href="#">
-                    <i className="fas fa-sliders-h"></i>
-                    <span>Settings</span>
-                </a>
-            </SidebarContainer>
-        )
+            <a href="#">
+                <i className="fas fa-desktop"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#">
+                <i className="fas fa-cogs"></i>
+                <span>Components</span>
+            </a>
+            <a href="#">
+                <i className="fas fa-table"></i>
+                <span>Tables</span>
+            </a>
+            <a href="#">
+                <i className="fas fa-th"></i>
+                <span>Forms</span>
+            </a>
+            <a href="#">
+                <i className="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+            <a href="#">
+                <i className="fas fa-sliders-h"></i>
+                <span>Settings</span>
+            </a>
+        </SidebarContainer>
+    )
 }
 
 const SidebarContainer = styled.div`
@@ -122,9 +66,12 @@ const SidebarContainer = styled.div`
     background: #2f323a;
     display: flex;
     flex-direction: column;
-    transition: 0.5s;
+    transition: 0.25s;
     transition-property: all;
     overflow-y: auto;
+
+    width: ${(props) => props.hideSidebar && '0'};
+    pointer-events: ${(props) => props.hideSidebar && 'none'};
 
     div {
         height: 22rem;
