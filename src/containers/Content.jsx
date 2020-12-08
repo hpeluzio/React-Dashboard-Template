@@ -34,11 +34,13 @@ const Content = () => {
 const ContentContainer = styled.div`
     position: fixed;
     z-index: 0;
-    width: 100%;
     height: 93%;
+    width: ${(props) => !props.mobile && 'calc(100vw - var(--sidebar-width))'};
+    width: ${(props) => props.mobile && 'calc(100vw)'};
+    left: var(--sidebar-width);
+    left: ${(props) => props.mobile && '0'};
     right: 0;
     top: var(--header-height);
-    left: var(--sidebar-width);
     transition: 0.25s;
     transition-property: all;
     background-image: url(${contentBackground});
@@ -47,12 +49,11 @@ const ContentContainer = styled.div`
     background-size: cover;
     overflow-y: auto;
 
-    left: ${(props) => props.mobile && '0'};
-
     .content-container {
+        display: block;
+        flex-wrap: wrap;
         background-color: #fff;
-        margin: 10px;
-        width: auto;
+        margin: 1rem;
         height: auto;
         padding: 1rem;
         border: 2px solid rgba(0, 0, 0, 0.1);
